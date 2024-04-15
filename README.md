@@ -1,7 +1,7 @@
-# Online gadgets store
-A single-page application implements online store functionality. User can browse products, add them to the cart and favorites, search products, sort products, change the quantity of products in the cart, and view product details.
+# Authentication App
+A single-page application that alows user to register, login or change the password. Loged user can see the list of all activated users, change his name password or email. Implements the look and behaviour of old computers.
 
-# [DEMO](https://anastasiia-tilikina.github.io/gadgets-store/)
+# [DEMO](https://sergey-mironenko.github.io/authentication-app/)
 
 # Table of contents
 - [Technologies used](#technologies-used)
@@ -15,8 +15,8 @@ A single-page application implements online store functionality. User can browse
 - JSX
 - TypeScript
 - JavaScript
-- LoDash
-- Fetch, API
+- Node.js
+- Axios, API
 - Sass (SCSS)
 - CSS Modules
 - BEM methodology
@@ -29,11 +29,10 @@ BEM methodology is used for naming and styling.
 # Features & Functionality
 
 ## App 
-- App is responsive and works on all screen sizes.
+- App replicates the behaviour and appearance of old computers.
 - Navigation is implemented using React Router.
-- App is created in Dark and Light themes. User can switch between themes by clicking on the theme icon in the header. Theme is saved in the local storage.
 
-![Dominica](./public/video_2024-04-15_12-57-46.gif)
+![Dominica](./public/App.gif)
 ## Home page
 - Products sliders with the ability to scroll products by clicking on the arrows or dragging the slider (on Mobile devices). Sliders are responsive and change the number of products displayed depending on the screen size. Products are fetched from the server.
 
