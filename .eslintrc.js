@@ -1,12 +1,10 @@
 module.exports = {
-  extends: ['@mate-academy/eslint-config-react-typescript'],
-  rules: {
-    'max-len': ['error', {
-      ignoreTemplateLiterals: true,
-      ignoreComments: true,
-    }],
-    'jsx-a11y/label-has-associated-control': ["error", {
-      assert: "either",
-    }],
+  extends: '@mate-academy/eslint-config',
+  env: {
+    jest: true
   },
+  rules: {
+    'no-proto': 0
+  },
+  plugins: ['jest']
 };
