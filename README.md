@@ -53,12 +53,23 @@ Backend is built using Express. Registered users are stored in SQL database.
 
 ![Activation](./public/Activation.gif)
 
-## Login pages
+## Login page
 - Checks if such user exists and activated.
 - Loging user in and sending access and refresh tokens. Access token is stored in locale storage while refresh token is stored in cookies.
 - Alows to save email and password.
 
 ![Login](./public/Login.gif)
+
+## Verify and reset pages for non authenticated user
+- Asks to enter an email, end verifies it.
+- Sends a confirmition password and saves it to the cookies.
+- After entering password from email compares it with password from cookies.
+- Redirects to reset page and asks to type and repet it.
+- If passwords do not match or new password is same to old password shows appropriate error.
+- After reset alows to return to login page.
+- Alows to reset password for many users in different sessions without any conflict.
+
+![Reset](./public/Reset.gif)
 
 - Pagination is implemented. The number of products displayed on the page can be changed by the user.
 - Search and filter products by name is implemented.

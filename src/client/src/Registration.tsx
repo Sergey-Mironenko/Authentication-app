@@ -5,7 +5,7 @@ import { useLoading } from './utils/hooks';
 import { Timer } from './types/Timer';
   
 export const Registration = () => {
-  const instructions = 'Email must have @ symbol and letter or number after it. Password must be from 8 to 20 symbols and have at least one number or one letter.';
+  const instructions = 'Email must have @ symbol and mailbox name after it. Password must be from 8 to 20 symbols and have at least one big letter and one number.';
   const [text, setText] = useState('E');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
