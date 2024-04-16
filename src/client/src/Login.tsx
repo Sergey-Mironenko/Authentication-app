@@ -27,6 +27,14 @@ export const Login = () => {
   let interval = useRef<Timer | null>(null);
   const [message, setMessage] = useLoading(interval, '');
 
+  const cleanCredentials = async () => {
+    try {
+      await clearCredentials();
+    } catch {
+      return;
+    }
+  };
+
   const handleMessage = (errorMessage: string) => {
     for (let i = 1; i <= errorMessage.length + 1 ; i++) {
       timer2.current = setTimeout(() => {
@@ -39,11 +47,9 @@ export const Login = () => {
     setIsLoading(true);
   
     try {
-      isRemembered ? (
+      if (isRemembered) {
         await rememberCredentials(email, password)
-      ) : (
-        await clearCredentials()
-      );
+      };
   
       const { user, accessToken } = await loginUser(email, password);
   
@@ -109,7 +115,7 @@ export const Login = () => {
   
       return () => {
         clearTimeout(timer1.current as Timer);
-        clearTimeout(timer2.current as Timer)
+        clearTimeout(timer2.current as Timer);
       }
     }, []);
   
@@ -117,7 +123,13 @@ export const Login = () => {
       if (isLoading) {
         setMessage('...');
       }
-    }, [isLoading, setMessage]);
+
+      return () => {
+        if (!isRemembered) {
+          cleanCredentials();
+        }
+      };
+    }, [isLoading, setMessage, isRemembered]);
   
     return (
       isSectionVisible ? (

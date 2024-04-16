@@ -15,16 +15,21 @@ A single-page application that alows user to register, login or change the passw
 - JSX
 - TypeScript
 - JavaScript
-- Node.js
 - Axios, API
+- Node.js
+- Espress
+- SQL
+- Sequelize
+- Nodemailer
+- JWT
 - Sass (SCSS)
 - CSS Modules
 - BEM methodology
 
 # Structure
-App is built using functional components and React Hooks.
-Each component is abstract and fully reusable. Components are styled using Sass (SCSS) and CSS Modules (.env variable SASS_PATH added for utils import).
-BEM methodology is used for naming and styling.
+Frontend is built using functional components and React Hooks. Each component is abstract and fully reusable. Components are styled using Sass (SCSS). BEM methodology is used for naming and styling.
+Backend is built using Express. Registered users are stored in SQL database.
+`Wait` function was used in all requests to server in order to simulate the loading proccess and demonstrate the loader.
 
 # Features & Functionality
 
@@ -32,17 +37,28 @@ BEM methodology is used for naming and styling.
 - App replicates the behaviour and appearance of old computers.
 - Navigation is implemented using React Router.
 
-![Dominica](./public/App.gif)
-## Home page
-- Products sliders with the ability to scroll products by clicking on the arrows or dragging the slider (on Mobile devices). Sliders are responsive and change the number of products displayed depending on the screen size. Products are fetched from the server.
+![App](./public/App.gif)
 
-## Catalog pages
-- Products are fetched from the server by category.
-- `Wait` function was used to simulate the loading of products from the server to demonstrate the loader.
-- Ability to sort products by name, price, and age is implemented.
-- All sorting parameters are saved in the URL.
+## Registration page
+- Checks entered data for validity.
+- In case of network server or validation error shows appropriate error.
+- Sending an activation email.
 
-![Dominica](./public/video_2024-04-15_12-57-46.gif)
+![Registration](./public/Registration.gif)
+
+## Activation page
+- Checks if this user needs activation.
+- If user is already activated or doesn't exist shows error.
+- Activates and loging this user.
+
+![Activation](./public/Activation.gif)
+
+## Login pages
+- Checks if such user exists and activated.
+- Loging user in and sending access and refresh tokens. Access token is stored in locale storage while refresh token is stored in cookies.
+- Alows to save email and password.
+
+![Login](./public/Login.gif)
 
 - Pagination is implemented. The number of products displayed on the page can be changed by the user.
 - Search and filter products by name is implemented.

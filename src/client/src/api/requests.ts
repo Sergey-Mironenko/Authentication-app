@@ -69,6 +69,8 @@ export const activate = async (token: string) => {
 }
 
 export const loginUser = async (email: string, password: string) => {
+  await wait(2000);
+
   const response = await client.post('/login', { email, password });
 
   return response.data;
