@@ -1,8 +1,6 @@
 # Authentication App
 A single-page application that alows user to register, login or change the password. Loged user can see the list of all activated users, change his name password or email. Implements the look and behaviour of old computers.
 
-# [DEMO](https://sergey-mironenko.github.io/authentication-app/)
-
 # Table of contents
 - [Technologies used](#technologies-used)
 - [Structure](#structure)
@@ -11,6 +9,7 @@ A single-page application that alows user to register, login or change the passw
 
 # Technologies used
 - React.js
+- Redux
 - React Router(v6)
 - JSX
 - TypeScript
@@ -19,100 +18,107 @@ A single-page application that alows user to register, login or change the passw
 - Node.js
 - Espress
 - SQL
-- Sequelize
+- ORM
 - Nodemailer
 - JWT
 - Sass (SCSS)
-- CSS Modules
 - BEM methodology
 
 # Structure
 Frontend is built using functional components and React Hooks. Each component is abstract and fully reusable. Components are styled using Sass (SCSS). BEM methodology is used for naming and styling.
 Backend is built using Express. Registered users are stored in SQL database.
-`Wait` function was used in all requests to server in order to simulate the loading proccess and demonstrate the loader.
 
 # Features & Functionality
 
 ## App 
 - App replicates the behaviour and appearance of old computers.
 - Navigation is implemented using React Router.
+- `Wait` function was used in all requests to server in order to simulate the loading proccess and demonstrate the loader.
+- If user is loged for too long and refresh token is expired, after page reload or any request to server user will be immediately loged out.
 
-![App](./public/App.gif)
+![App](./public/Gifs/Application.gif)
 
 ## Registration page
 - Checks entered data for validity.
-- In case of network server or validation error shows appropriate error.
+- In case of network server or validation error shows appropriate message.
 - Sending an activation email.
 
-![Registration](./public/Registration.gif)
+![Registration](./public/Gifs/Registration.gif)
 
 ## Activation page
 - Checks if this user needs activation.
-- If user is already activated or doesn't exist shows error.
-- Activates and loging this user.
+- If user is already activated or doesn't exist shows appropriate message.
+- Activates and logging this user in.
 
-![Activation](./public/Activation.gif)
+![Activation](./public/Gifs/Activation.gif)
 
 ## Login page
+- Asks to enter email and password.
 - Checks if such user exists and activated.
-- Loging user in and sending access and refresh tokens. Access token is stored in locale storage while refresh token is stored in cookies.
-- Alows to save email and password.
+- Logging user in and sending access and refresh tokens. Access token is stored in locale storage while refresh token is stored in cookies.
+- In case of error shows appropriate message.
+- Alows to remember email and password.
 
-![Login](./public/Login.gif)
+![Login](./public/Gifs/Login.gif)
 
 ## Verify and reset pages for non authenticated user
 - Asks to enter an email, end verifies it.
-- Sends a confirmition password and saves it to the cookies.
+- Sends one time password and saves it to the cookies.
 - After entering password from email compares it with password from cookies.
-- Redirects to reset page and asks to type and repet it.
-- If passwords do not match or new password is same to old password shows appropriate error.
+- After confirmition redirects user to reset page and asks to enter new password and repeat it.
+- If passwords don't match or new password is the same as old password shows appropriate message.
 - After reset alows to return to login page.
+- In case of error in any step shows appropriate message.
 - Alows to reset password for many users in different sessions without any conflict.
 
-![Reset](./public/Reset.gif)
+![Reset](./public/Gifs/Reset.gif)
 
-- Pagination is implemented. The number of products displayed on the page can be changed by the user.
-- Search and filter products by name is implemented.
-- Debounce function is used to prevent the server from being overloaded with requests.
+## Profile main page
+- Shows loged user name.
+- Alows to log out and navigate between profile pages.
 
-![Search](./src/READEMEimg/search.gif)
+![Login](./public/Gifs/Profile.gif)
 
-## Product details page
-- Product details are fetched from the server.
-- `Wait` function was used to simulate the loading of products from the server to demonstrate the loader.
-- User can pick a color and capacity of the product.
-- Photos of the product can be changed by clicking on the thumbnails or by swiping them (on Mobile devices).
-- User can add the product to the cart or favorites.
-- If the product is not available or a few items are available, the user will see a message about it.
+## Users list profile page
+- Shows all activated users.
+- Pagination is implemented.
+- In case of error or no users shows appropriate message.
 
-![Product details](./src/READEMEimg/details_page.gif)
+![Users list](./public/Gifs/Users.gif)
 
-## Cart page
-- User can change the quantity of products in the cart and remove products from the cart.
-- Cart items count is shown near the Cart icon in the header.
-- Total amount and quantity are calculated automatically.
-- Cart items are saved in the local storage.
+## Rename profile page
+- Asks to enter new name and changes it in database.
+- In case of error shows appropriate message.
+- Smoothly changes name in profile already after successfully change.
 
-![Cart](./src/READEMEimg/cart.gif)
+![Rename](./public/Gifs/Rename.gif)
 
-## Favorites page
-- User can add products to favorites and remove them from favorites.
-- Favorites count is shown near the Favorites icon in the header.
-- Favorites are saved in the local storage.
+## Change email profile page
+- Asks to enter users password and verifies it.
+- Asks to enter new email and checks if it isn't used.
+- Sends one time password to new email and saves it to users cookies.
+- After entering password from email compares it with password from cookies.
+- After confirmition changes users email and notifies old email about changes.
+- In case of error in any step shows appropriate message.
 
-![Favorites](./src/READEMEimg/favorites.gif)
+![Change email](./public/Gifs/ChangeEmail.gif)
+
+## Change password profile page
+- Asks to enter users password and verifies it.
+- Asks to enter new password and repeat it, checks if it isn't the same as user using.
+- Changes users password.
+- In case of error in any step shows appropriate message.
+
+![Change password](./public/Gifs/ChangePassword.gif)
 
 ## Reflections
-Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features.
+Project goals included using technologies learned up until this point, familiarizing myself with documentation for new features and creating an application that replicates the design and functionality of programs from the 60s.
 
-One of the main challenges I ran into was using new Data router(v 6.6.1) (created via `createHashRouter` and rendered with `RouterProvider`) with new key features:
+I ran into necessity to use new features, such as:
  - loaders
  - error boundaries
- - data prefetching
- - lazy loading
- - new hooks (useAsyncValue, useLoaderData, etc.)
- I had to learn how to use them and implement them in the project.
-
- Another challenge was to create 'pseudo' API. I've created my own data structure and written classes and methods to generate data for rendering and save them in `.json` files.
-
- At the end of the day, I've figured out how to work with bigger projects and how to use mentioned technologies all together.
+ - data fetching
+ - creating custom middlewares
+ - mailing
+ - Another challenge was to implement troubleproof refresh funtionality.
+ At the end of the day, I've figured out how to combine frontend and backend together in bigger project and what problems can be encountered in the process.

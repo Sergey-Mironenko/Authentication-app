@@ -23,14 +23,11 @@ export const App: React.FC = () => {
 
     if (token) {
       try {
-        console.log('try to refresh')
         const { user, accessToken } = await refresh();
         
         localStorage.setItem('accessToken', accessToken);
-        console.log('refreshed')
         setLogedUser(user);
       } catch(e) {
-        console.log('fail')
         handleRefreshFail();
       } finally {
         setIsChecked(true);

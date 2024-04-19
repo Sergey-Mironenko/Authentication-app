@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import { useAppSelector } from './app/hooks';
 import { useLoading } from './utils/hooks';
-import { clearCredentials, resetEmail, verifyEmail, verifyPassword } from './api/requests';
+import { resetEmail, verifyEmail, verifyPassword } from './api/requests';
 import { actions as logedUserActions } from './features/logedUser';
 import { actions as refreshErrorActions } from './features/refreshError';
 import { User } from './types/User';
@@ -15,7 +15,7 @@ export const ChangeEmail = () => {
   const { logedUser } = useAppSelector(state => state.logedUser);
   const setLogedUser = useCallback((user: User) => dispatch(logedUserActions.setLogedUser(user)), [dispatch]);
   const handleRefreshFail = useCallback(() => dispatch(refreshErrorActions.handleRefreshFail()), [dispatch]);
-  const instructions = 'Enter your password first. Then enter new email and and check your email box.';
+  const instructions = 'Enter your password first. Then enter new email and and check your new email box.';
   const [text, setText] = useState('E');
   const [password, setPassword] = useState('');
   const [newEmail, setNewEmail] = useState('');
@@ -71,6 +71,7 @@ export const ChangeEmail = () => {
   
   const handleSend = async () => {
     setIsLoading(true);
+    setResetToken('');
         
     try {
       await verifyEmail(newEmail);
@@ -102,11 +103,11 @@ export const ChangeEmail = () => {
   
     try {
       if (logedUser) {
-        await clearCredentials();
+        const { user, accessToken } = await resetEmail(logedUser.email, currentEmail, resetToken);
 
-        const response = await resetEmail(logedUser.email, currentEmail, resetToken);
+        localStorage.setItem('accessToken', accessToken);
   
-        setLogedUser(response);
+        setLogedUser(user);
         setCurrentEmail('');
         setNewEmail('');
         handleMessage('Successfully reseted');

@@ -18,8 +18,6 @@ export const RoutesProvider = () => {
   const { resetingUser } = useAppSelector(state => state.resetingUser);
   const { refreshError } = useAppSelector(state => state.refreshError);
 
-  console.log(refreshError)
-
   return (
     <Routes>
       <Route

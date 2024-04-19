@@ -21,13 +21,7 @@ export const catchAuthorizationError = (action) => {
         const { refreshToken } = req.cookies;
         const verifiedUser = jwtService.verifyRefresh(refreshToken);
 
-        res.setHeader(
-          'Set-Cookie',
-          cookie.serialize('refreshToken', '', {
-            httpOnly: true,
-            maxAge: 0,
-          })
-        );
+        res.clearCookie('refreshToken');
 
         if (verifiedUser) {
           await tokenService.remove(verifiedUser.id);

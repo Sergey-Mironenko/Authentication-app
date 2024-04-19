@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 const sign = (user) => ({
   accessToken: jwt.sign(user, process.env.JWT_KEY_ACCESS, { expiresIn: '60s' }),
-  refreshToken: jwt.sign(user, process.env.JWT_KEY_REFRESH, { expiresIn: '3600s' }),
+  refreshToken: jwt.sign(user, process.env.JWT_KEY_REFRESH, { expiresIn: '86400s' }),
 });
 
 const verifyAccess = (token) => {

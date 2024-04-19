@@ -42,10 +42,12 @@ export const Rename = () => {
     
     try {
       if (logedUser) {
-        const response = await rename(logedUser.email, name);
+        const { user, accessToken } = await rename(logedUser.email, name);
 
+        localStorage.setItem('accessToken', accessToken);
+        
         setIsRenamed(true);
-        setLogedUser(response);    
+        setLogedUser(user);    
         setName('');
         handleMessage('Successfully renamed');
       }

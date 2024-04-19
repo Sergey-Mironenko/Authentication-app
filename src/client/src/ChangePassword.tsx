@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
 import { useAppSelector } from './app/hooks';
 import { useLoading } from './utils/hooks';
-import { clearCredentials, resetPassword, verifyPassword } from './api/requests';
+import { resetPassword, verifyPassword } from './api/requests';
 import { actions as refreshErrorActions } from './features/refreshError';
 import { Timer } from './types/Timer';
 
@@ -78,8 +78,6 @@ export const ChangePassword = () => {
     
     try {
       if (logedUser) {
-        await clearCredentials();
-
         await resetPassword(logedUser.email, newPassword);
 
         setOldPassword('');
@@ -108,7 +106,7 @@ export const ChangePassword = () => {
   };
 
   const onReset = () => {
-    if (newPassword) {
+    if (!newPassword) {
       handleMessage('Please enter new password');
     } else if (!repeatedPassword) {
       handleMessage('Please repeat new password');

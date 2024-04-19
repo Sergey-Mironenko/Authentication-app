@@ -2,9 +2,9 @@ import { userService } from '../services/user.service.js'
 import { emailService } from '../services/email.service.js';
 import { ApiError } from '../exeptions/ApiError.js';
 import { v4 as uuidv4 } from "uuid";
-import cookie from 'cookie';
 import bcrypt from 'bcrypt';
 import { isEmailInvalid, isPasswordInvalid } from '../utils/functions.js';
+import { sendAuthentication } from './sendAuth.controller.js';
 
 export const loadAllActivated = async (req, res) => {
   const allUsers = await userService.getAllActivated();
@@ -46,7 +46,7 @@ export const rename = async (req, res) => {
   user.name = name;
   await user.save();
 
-  res.send(userService.normalize(user));
+  await sendAuthentication(res, user);
 };
 
 export const verifyEmail = async (req, res) => {
@@ -67,13 +67,10 @@ export const verifyEmail = async (req, res) => {
   await emailService.sendToken(newEmail, resetToken, 'Email');
 
   res.status(200);
-  res.setHeader(
-    'Set-Cookie',
-    cookie.serialize('resetToken', resetToken, {
-      httpOnly: true,
-      maxAge: 1200,
-    })
-  );
+  res.cookie('resetToken', resetToken, {
+    httpOnly: true,
+    maxAge: 60 * 20 * 1000,
+  });
   res.end();
 };
 
@@ -100,7 +97,10 @@ export const resetEmail = async (req, res) => {
   user.email = newEmail;
   await user.save();
 
-  res.send(userService.normalize(user));
+  res.clearCookie('credentials');
+  res.clearCookie('resetToken');
+
+  await sendAuthentication(res, user);
 };
 
 export const resetPassword = async (req, res) => {
@@ -128,5 +128,7 @@ export const resetPassword = async (req, res) => {
   user.password = hashPassword;
   await user.save();
 
-  res.send(userService.normalize(user));
+  res.clearCookie('credentials');
+
+  await sendAuthentication(res, user);
 };

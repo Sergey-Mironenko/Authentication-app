@@ -4,9 +4,9 @@ import { jwtService } from '../services/jwt.service.js';
 import { tokenService } from '../services/token.service.js';
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from 'bcrypt';
-import cookie from 'cookie';
 import { ApiError } from '../exeptions/ApiError.js';
 import { isEmailInvalid, isPasswordInvalid } from '../utils/functions.js';
+import { sendAuthentication } from './sendAuth.controller.js';
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -78,13 +78,7 @@ export const logout = async (req, res) => {
   const { refreshToken } = req.cookies;
   const verifiedUser = jwtService.verifyRefresh(refreshToken);
 
-  res.setHeader(
-    'Set-Cookie',
-    cookie.serialize('refreshToken', '', {
-      httpOnly: true,
-      maxAge: 0,
-    })
-  );
+  res.clearCookie('refreshToken');
 
   if (verifiedUser) {
     await tokenService.remove(verifiedUser.id);
@@ -103,13 +97,11 @@ export const verify = async (req, res) => {
     await emailService.sendToken(email, verifyToken, 'Password');   
 
     res.status(200);
-    res.setHeader(
-      'Set-Cookie',
-      cookie.serialize(`verify-${email}`, verifyToken, {
-        httpOnly: true,
-        maxAge: 1200,
-      })
-    );
+    
+    res.cookie(`verify-${email}`, verifyToken, {
+      httpOnly: true,
+      maxAge: 60 * 20 * 1000,
+    });
     res.send(userService.normalize(user));
     
     return;
@@ -159,25 +151,16 @@ export const rememberCredentials = async (req, res) => {
   })
 
   res.status(200);
-  res.setHeader(
-    'Set-Cookie',
-    cookie.serialize('credentials', credentials, {
-      httpOnly: true,
-      maxAge: 3600,
-    })
-  );
+  res.cookie('credentials', credentials, {
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 1000,
+  });
   res.end();
 };
 
 export const clearCredentials = async (req, res) => {
   res.status(200);
-  res.setHeader(
-    'Set-Cookie',
-    cookie.serialize('credentials', '', {
-      httpOnly: true,
-      maxAge: 0,
-    })
-  );
+  res.clearCookie('credentials');
   res.end();
 };
 
@@ -207,26 +190,6 @@ export const reset = async (req, res) => {
   await user.save();
 
   res.send(userService.normalize(user));
-};
-
-export const sendAuthentication = async (res, user) => {
-  const normalizedUser = userService.normalize(user);
-  const { accessToken, refreshToken } = jwtService.sign(normalizedUser);
-  
-  await tokenService.save(user.id, refreshToken);
-
-  res.setHeader(
-    'Set-Cookie',
-    cookie.serialize('refreshToken', refreshToken, {
-      httpOnly: true,
-      maxAge: 3600,
-    })
-  );
-
-  res.send({
-    user: normalizedUser,
-    accessToken,
-  });
 };
 
 export const refresh = async (req, res, next) => {
