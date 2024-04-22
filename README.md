@@ -36,21 +36,21 @@ Backend is built using Express. Registered users are stored in SQL database.
 - `Wait` function was used in all requests to server in order to simulate the loading proccess and demonstrate the loader.
 - If user is loged for too long and refresh token is expired, after page reload or any request to server user will be immediately loged out.
 
-https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/c208682e-b1ec-406b-9b76-0b2e7992c062
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/6db9e12b-cce5-40cc-b68c-9927aaaa463c
 
 ## Registration page
 - Checks entered data for validity.
 - In case of network server or validation error shows appropriate message.
 - Sending an activation email.
 
-![Registration](./public/Gifs/Registration.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/05eb41e3-d908-4acd-bec0-530427fc3f7f
 
 ## Activation page
 - Checks if this user needs activation.
 - If user is already activated or doesn't exist shows appropriate message.
 - Activates and logging this user in.
 
-![Activation](./public/Gifs/Activation.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190-815b-4fb3-875a-5478fe41cf4e
 
 ## Login page
 - Asks to enter email and password.
@@ -127,7 +127,14 @@ I ran into necessity to use new features, such as:
  
 
 
-https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/c208682e-b1ec-406b-9b76-0b2e7992c062
+
+
+
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190-815b-4fb3-875a-5478fe41cf4e
+
+
+
+
 
 
 
