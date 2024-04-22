@@ -123,3 +123,8 @@ I ran into necessity to use new features, such as:
  - Another challenge was to implement troubleproof refresh funtionality.
 
  At the end of the day, I've figured out how to combine frontend and backend together in bigger project and what problems can be encountered in the process.
+
+ 
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/5a499e6d-95aa-4b69-a9f0-6a554fe60295
+
+
