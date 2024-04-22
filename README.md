@@ -6,6 +6,7 @@ A single-page application that alows user to register, login or change the passw
 - [Structure](#structure)
 - [Features & Functionality](#features--functionality)
 - [Reflections](#reflections)
+- [Running project locally](#running-project-locally)
 
 # Technologies used
 - React.js
@@ -59,7 +60,7 @@ https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190
 - In case of error shows appropriate message.
 - Alows to remember email and password.
 
-![Login](./public/Gifs/Login.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/b8cd1243-8d71-497a-b38c-4b116e896353
 
 ## Verify and reset pages for non authenticated user
 - Asks to enter an email, end verifies it.
@@ -71,27 +72,27 @@ https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190
 - In case of error in any step shows appropriate message.
 - Alows to reset password for many users in different sessions without any conflict.
 
-![Reset](./public/Gifs/Reset.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/3c8fbfeb-e3b5-4881-b600-d9edf79fa0d0
 
 ## Profile main page
 - Shows loged user name.
 - Alows to log out and navigate between profile pages.
 
-![Login](./public/Gifs/Profile.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/cfa783fe-3ecc-4300-8b79-d2ceab3fbd91
 
 ## Users list profile page
 - Shows all activated users.
 - Pagination is implemented.
 - In case of error or no users shows appropriate message.
 
-![Users list](./public/Gifs/Users.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/1b349a46-2e64-4033-b3f8-19d157723a4c
 
 ## Rename profile page
 - Asks to enter new name and changes it in database.
 - In case of error shows appropriate message.
 - Smoothly changes name in profile already after successfully change.
 
-![Rename](./public/Gifs/Rename.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/f8eb4fba-9f7d-48d6-9882-3f69d9854f21
 
 ## Change email profile page
 - Asks to enter users password and verifies it.
@@ -101,7 +102,7 @@ https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190
 - After confirmition changes users email and notifies old email about changes.
 - In case of error in any step shows appropriate message.
 
-![Change email](./public/Gifs/ChangeEmail.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/e77b94aa-47b6-49e6-87bd-d2b0345ff762
 
 ## Change password profile page
 - Asks to enter users password and verifies it.
@@ -109,9 +110,9 @@ https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190
 - Changes users password.
 - In case of error in any step shows appropriate message.
 
-![Change password](./public/Gifs/ChangePassword.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/bb888ac2-cfe1-4a88-bc9e-37d08414f3a1
 
-## Reflections
+# Reflections
 Project goals included using technologies learned up until this point, familiarizing myself with documentation for new features and creating an application that replicates the design and functionality of programs from the 60s.
 
 I ran into necessity to use new features, such as:
@@ -124,15 +125,15 @@ I ran into necessity to use new features, such as:
 
  At the end of the day, I've figured out how to combine frontend and backend together in bigger project and what problems can be encountered in the process.
 
- 
+ # Running project locally
 
-
-
-
-
-https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/18c7d190-815b-4fb3-875a-5478fe41cf4e
-
-
+ If you want to test this app - follow this steps:
+ - You will need pgAdmin 4.
+ - Clone project code.
+ - Run `npm install` from root directory and from `src/client` directory.
+ - Run `node setup.js` from root directory.
+ - Run `npm start` in both previous directories.
+ - Have fun.
 
 
 
