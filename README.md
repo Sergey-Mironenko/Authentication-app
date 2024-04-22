@@ -36,7 +36,7 @@ Backend is built using Express. Registered users are stored in SQL database.
 - `Wait` function was used in all requests to server in order to simulate the loading proccess and demonstrate the loader.
 - If user is loged for too long and refresh token is expired, after page reload or any request to server user will be immediately loged out.
 
-![App](./public/Gifs/Application.gif)
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/c208682e-b1ec-406b-9b76-0b2e7992c062
 
 ## Registration page
 - Checks entered data for validity.
@@ -125,6 +125,9 @@ I ran into necessity to use new features, such as:
  At the end of the day, I've figured out how to combine frontend and backend together in bigger project and what problems can be encountered in the process.
 
  
-https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/5a499e6d-95aa-4b69-a9f0-6a554fe60295
+
+
+https://github.com/Sergey-Mironenko/Authentication-app/assets/106872008/c208682e-b1ec-406b-9b76-0b2e7992c062
+
 
 
